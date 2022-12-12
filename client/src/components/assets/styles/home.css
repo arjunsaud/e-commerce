@@ -1,0 +1,55 @@
+.categorylist{
+    display: flex;
+    background-color: rgb(37, 85, 85);
+    flex-direction:column;
+}
+
+.category{
+    margin: 30px;
+}
+
+.product{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+
+/* hero section css */
+.herosection{
+    margin: 5px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.imagelider{
+    background-color: blue;
+    flex-grow: 8;
+}
+.categoryaisde{
+    background-color: aliceblue;
+    border-width: 10px;
+    border-radius: 2px;
+    margin: 0px 5px;
+    flex-grow: 2;
+    align-content: center;
+    padding: 5px;
+}
+.categoryaisde div{
+    display:  flex;
+    flex-direction: column;
+}
+.brands{
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    margin: 0px 10px;
+    font-size: 20px;
+}
+.brands:hover{
+    background-color: rgb(57, 5, 105);
+    border-radius: 5px;
+}
+

@@ -1,0 +1,46 @@
+.sidenavbar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.sideham{
+    display: none;
+}
+.topbar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    background-color: blueviolet;
+}
+.sidelogo{
+    flex-grow: 0.9;
+}
+.sidemenu{
+    display: flex;
+    flex-direction: row;
+}
+.sidemenulist{
+    background-color: rgb(234, 232, 236);
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+}
+.asidemenulink{
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+
+@media screen and (max-width: 760px) {
+    .sideham{
+        display: block;
+    }
+    .asidemenulink{
+        display: none;
+    }
+}
