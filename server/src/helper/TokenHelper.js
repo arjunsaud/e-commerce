@@ -2,7 +2,7 @@ const { JWT_SECRET } = require("../config/variables");
 const jwt = require("jsonwebtoken");
 
 const TokenHelper = {
-  generateToken: async (payload, options = { expiresIn: "10m" }) => {
+  generateToken: async (payload, options = { expiresIn: "1m" }) => {
     const token = jwt.sign(payload, JWT_SECRET, { ...options });
     return token;
   },

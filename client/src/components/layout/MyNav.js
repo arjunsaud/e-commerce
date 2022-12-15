@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useRef, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../assets/styles/navbar.css";
 import { BiUserCircle, BiSearch, BiCart } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
@@ -28,7 +28,7 @@ const MenuBar = () => {
             className="hamburger"
             onClick={() => setShowHamburger(!showHamburger)}
           >
-            {showHamburger ? <RxHamburgerMenu /> : <IoMdClose />}
+            {showHamburger ? <RxHamburgerMenu color="white" /> : <IoMdClose color="white"/>}
           </div>
           <ul
             className={
@@ -57,7 +57,7 @@ const MenuBar = () => {
             </li>
             <li>
               <Link className="menuitemslink" to="/">
-                Smartwatch
+                Smartwatches
               </Link>
             </li>
             <li>
@@ -78,26 +78,35 @@ const MenuBar = () => {
 };
 
 const TopBar = () => {
-  const { isLoggedIn, loggedIn } = useContext(GlobalContext);
+  const { role,logout,search,setSearchQuery } = useContext(GlobalContext);
+
+  const query=useRef()
+  const navigate=useNavigate()
+
+  const handleSearch=()=>{
+    setSearchQuery(query.current.value)
+    navigate("/search")
+  }
+
   return (
     <>
       <div className="logo mx-4">e-Gadget</div>
       <div className="search">
-        <input type="text" name="search" placeholder="Search Products" />
-        <button type="button" name="button">
+        <input type="text" name="search" ref={query} value={search} placeholder="Search Products" required />
+        <button type="button" name="button" onClick={handleSearch}>
           <BiSearch />
         </button>
       </div>
       <div className="sidemenu mx-4">
-        {isLoggedIn ? (
+        {role ? (
           <div>
-            <Link className="sidemenulink" href="#">
+            <Link className="sidemenulink" to="/cart">
               <BiCart />
             </Link>
-            <Link className="sidemenulink" href="#">
+            <Link className="sidemenulink" to="/profile">
               <BiUserCircle />
             </Link>
-            <Link className="sidemenulink" onClick={() => loggedIn()}>
+            <Link className="sidemenulink" onClick={logout}>
               <FiLogOut color="red" />
             </Link>
           </div>

@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../config/axios"
+import { setInstance } from "../../config/axios"
 
 const initialValues = {
   email: "",
@@ -11,6 +11,8 @@ const initialValues = {
 };
 
 const Signup = () => {
+  const axios = setInstance();
+
   const navigate=useNavigate()
   const { values, handleChange, handleBlur, handleSubmit, errors } = useFormik({
     initialValues,

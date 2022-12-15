@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { GlobalContext } from "../../context/GlobalContext";
 import AdminNav from "../layout/AdminNav";
+import {GlobalContext} from "../../context/GlobalContext"
 const AdminWrapper = () => {
-  const {loggedIn,userRole}=useContext(GlobalContext)
+  const { role } = useContext(GlobalContext);
   return (
-      <AdminNav/>
+    (role)?(<AdminNav/>):(<Navigate to="/login"/>)
   );
 };
 export default AdminWrapper;

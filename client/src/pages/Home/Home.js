@@ -1,97 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../components/assets/styles/home.css";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
+import { setInstance } from "../../config/axios";
 
 const Home = () => {
+  const axios = setInstance();
+  const [products, setProducts] = useState([]);
+  const fetchData = async () => {
+    const { data } = await axios.get("products/getproducts");
+    setProducts(data);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <HeroSection />
       <div className="categorylist">
-        <Category />
+        <Category products={products} />
       </div>
     </>
   );
 };
 
-const Category = () => {
+const Category = ({ products }) => {
   return (
     <>
       <div className="category">
         <h4>Laptops</h4>
         <div className="product">
           <Row xs={1} sm={2} md={3} lg={4} xl={6} className="g-4">
-            <Col>
-              <Card xm={8}>
-                <Card.Img
-                  variant="top"
-                  src="https://static-01.daraz.com.np/p/df22541cc0d040d7c9a23db6202fd7ba.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <h4>Name</h4>
-                    <p>Price</p>
-                  </Card.Title>
-                  <Card.Text>
-                    <button>Buy</button>
-                    <button>Add to Cart</button>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src="https://static-01.daraz.com.np/p/df22541cc0d040d7c9a23db6202fd7ba.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>Card title</Card.Title>
-                  <Card.Text>This is a</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src="https://static-01.daraz.com.np/p/df22541cc0d040d7c9a23db6202fd7ba.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>Card title</Card.Title>
-                  <Card.Text>This is a</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src="https://static-01.daraz.com.np/p/df22541cc0d040d7c9a23db6202fd7ba.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>Card title</Card.Title>
-                  <Card.Text>This is a</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src="https://static-01.daraz.com.np/p/df22541cc0d040d7c9a23db6202fd7ba.jpg"
-                />
-                <Card.Body>
-                  <Card.Title>Card title</Card.Title>
-                  <Card.Text>This is a</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+            {products ? (
+              products.map((value) => {
+                return(
+                <Col>
+                  <Card xm={8}>
+                    <Card.Img
+                      variant="top"
+                      src="https://static-01.daraz.com.np/p/df22541cc0d040d7c9a23db6202fd7ba.jpg"
+                    />
+                    <Card.Body>
+                      <Card.Title>
+                        <h4>{value.productName}</h4>
+                        <p>{value.productPrice}</p>
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <button className="buyadd">Buy</button>
+                        <button className="buyadd">Add to Cart</button>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>)
+              })
+            ) : (
+              <>
+              No Products</>
+            )}
           </Row>
         </div>
       </div>
@@ -104,7 +73,7 @@ const HeroSection = () => {
     <>
       <div className="herosection">
         <HeroBrands />
-        <ImageSlider/>
+        <ImageSlider />
       </div>
     </>
   );

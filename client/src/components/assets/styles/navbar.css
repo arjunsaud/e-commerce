@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: rgb(138, 134, 134);
   flex-wrap: wrap;
   padding: 10px;
 }
@@ -28,8 +28,8 @@
   margin:0 0 0 4px;
   width: 40px;
   height: 40px;
-  background-color: rgb(244, 244, 248);
-  color: rgb(233, 233, 238);
+  background-color: rgb(17, 75, 75);
+  color: rgb(230, 230, 230);
   border-radius: 40px;
 }
 
@@ -37,14 +37,16 @@
   font-size: 24px;
   margin: 5px;
   color: white;
+  background-color: black;
   padding: 5px;
   text-decoration: none;
 }
 .menu{
+  
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: rgb(222, 222, 230);
+  background-color: rgb(27, 27, 44);
 }
 
 .menuitems{

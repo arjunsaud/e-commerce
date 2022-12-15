@@ -1,3 +1,6 @@
+const path=require("path")
+const fs=require('fs')
+
 class ProductService {
   Product;
   constructor(Product) {
@@ -22,6 +25,55 @@ class ProductService {
       throw error
     }
   }
+
+  async getProduct(id){
+    try {
+      const newproduct=await this.Product.find({_id:id})
+      const  product= JSON.parse(JSON.stringify(newproduct));
+      return product
+    } catch (error) {
+      throw error
+    }
+  }
+  async deleteProduct(id){
+    try {  
+      const resp=await this.Product.find({_id:id.id})
+      const file=resp[0].image
+  
+      if(file!==undefined || file!==""){
+        const newproduct=await this.Product.deleteOne({_id:id.id})
+        return newproduct
+      }else{
+        let imagepath=path.join(__dirname,'../../../uploads/')
+        fs.unlinkSync(imagepath+file);
+        const newproduct=await this.Product.deleteOne({_id:id.id})
+        return newproduct
+    }
+    } catch (error) {
+      return res.status(401).json({
+        message: err.message,
+      });
+    } 
+  }
+
+  async editProduct(id){
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
+
+  async searchProducts(filters){
+    try {
+      const products=await this.Product.find({...filters})
+      return products
+    } catch (error) {
+      throw error
+    }
+  }
+
 }
 
 module.exports = ProductService;

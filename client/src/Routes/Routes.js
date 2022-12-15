@@ -9,6 +9,10 @@ import Signup from "../pages/Auth/Signup";
 import Dashboard from "../pages/admin/Dashboard";
 import Profile from "../pages/admin/Profile";
 import Products from "../pages/admin/Products";
+import AddProduct from "../pages/admin/AddProduct";
+import UserProfile from "../pages/profile/UserProfile";
+import Search from "../pages/search/Search";
+import Cart from "../pages/cart/Cart";
 
 export const Router = createBrowserRouter([
   {
@@ -30,6 +34,10 @@ export const Router = createBrowserRouter([
       {
         path: "/admin/products",
         element: <Products />,
+      },
+      {
+        path: "/admin/addproduct",
+        element: <AddProduct />,
       }
     ],
   },
@@ -49,6 +57,18 @@ export const Router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/profile",
+        element: <UserProfile />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

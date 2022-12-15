@@ -1,20 +1,29 @@
 import { createContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetAuthDetails } from "../Slices/authSlice";
 
 export const GlobalContext = createContext();
 
 export const GlobalContextProvider = (props) => {
-  const [userRole,setUserRole]=useState("")
-  const [isLoggedIn,setIsLoggedIn]=useState(false)
+  const dispatch = useDispatch()
 
-  const loggedIn=()=>{
-    setIsLoggedIn(!isLoggedIn)
+  const {role} = useSelector((state) => {
+    return state.auth
+  });
+
+  const [search,setSearch]=useState()
+
+  const setSearchQuery=(data)=>{
+    setSearch(data)
   }
-  const setUser=(role)=>{
-    setUserRole(role)
-  }
+
+  const logout= () => {
+    dispatch(resetAuthDetails())
+  };
 
   return (
-  <GlobalContext.Provider value={{isLoggedIn,loggedIn,setUser,userRole}}>
-    {props.children}
-  </GlobalContext.Provider>)
+    <GlobalContext.Provider value={{search,setSearchQuery,role,logout }}>
+      {props.children}
+    </GlobalContext.Provider>
+  );
 };

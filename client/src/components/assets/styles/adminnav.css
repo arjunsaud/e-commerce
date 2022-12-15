@@ -9,19 +9,20 @@
 .topbar{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width:auto;
     justify-content: space-around;
-    background-color: blueviolet;
+    background-color: rgb(36, 61, 78);
 }
 .sidelogo{
     flex-grow: 0.9;
+    color: white;
 }
 .sidemenu{
     display: flex;
     flex-direction: row;
 }
 .sidemenulist{
-    background-color: rgb(234, 232, 236);
+    background-color: rgb(56, 20, 54);
     height: 95vh;
     display: flex;
     flex-direction: column;
@@ -36,11 +37,11 @@
 }
 
 
-@media screen and (max-width: 760px) {
+/* @media screen and (max-width: 760px) {
     .sideham{
         display: block;
     }
     .asidemenulink{
         display: none;
     }
-}
+} */
