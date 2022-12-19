@@ -6,6 +6,8 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { setInstance } from "../../config/axios";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Slices/cartSlices";
 
 const Home = () => {
   const axios = setInstance();
@@ -29,6 +31,22 @@ const Home = () => {
 };
 
 const Category = ({ products }) => {
+  const dispatch=useDispatch()
+
+  const handleAddToCart=(id)=>{
+    const item= products.filter((value)=>{
+      if(id===value._id){
+        return true
+      }
+    })
+    const cartItem={
+      id:item[0]._id,
+      name:item[0].productName,
+      price:item[0].productPrice,
+      qty:1
+    }
+    dispatch(addToCart(cartItem))
+  }
   return (
     <>
       <div className="category">
@@ -38,7 +56,7 @@ const Category = ({ products }) => {
             {products ? (
               products.map((value) => {
                 return(
-                <Col>
+                <Col key={value._id}>
                   <Card xm={8}>
                     <Card.Img
                       variant="top"
@@ -51,7 +69,7 @@ const Category = ({ products }) => {
                       </Card.Title>
                       <Card.Text className="text-center">
                         <button className="buyadd">Buy</button>
-                        <button className="buyadd">Add to Cart</button>
+                        <button className="buyadd" onClick={()=>handleAddToCart(value._id)}>Add to Cart</button>
                       </Card.Text>
                     </Card.Body>
                   </Card>

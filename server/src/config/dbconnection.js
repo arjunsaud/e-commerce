@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { MONGO_URL } = require("./variables");
+
 mongoose.set('strictQuery',false)
 class Connection {
   connectToDb() {
@@ -19,10 +20,5 @@ class MongoConnection extends Connection {
     });
   }
 }
-
-
-
-
-
 
 module.exports = {MongoConnection};

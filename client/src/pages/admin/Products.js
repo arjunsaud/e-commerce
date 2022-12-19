@@ -5,6 +5,7 @@ import { setInstance } from "../../config/axios";
 const Products = () => {
 
   const axios = setInstance();
+
   const [products, setProducts] = useState([]);
   const fetchData = async () => {
     const { data } = await axios.get("products/getproducts");
@@ -19,7 +20,7 @@ const Products = () => {
     console.log(id);
   }
   const handleDelete=async(id)=>{
-    const data=await axios.delete(`products/deleteproduct/${id}`) 
+    await axios.delete(`products/deleteproduct/${id}`) 
     fetchData()
     //deleted message
   }

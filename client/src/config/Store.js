@@ -16,6 +16,7 @@ import { combineReducers } from "redux";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
+import cartReducer from "../Slices/cartSlices"
 //import storageSession from 'reduxjs-toolkit-persist/lib/storage/session'
 
 const persistConfig = {
@@ -24,14 +25,18 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-     auth: authReducer,
+  auth: authReducer,
+  cart:cartReducer
 });
+
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer:persistedReducer,
   middleware:[thunk]
 });
+
+
 
 export const persistor = persistStore(store)

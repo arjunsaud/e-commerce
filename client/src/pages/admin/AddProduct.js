@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 import { setInstance } from "../../config/axios";
@@ -11,17 +11,12 @@ const initialValues = {
 
 const AddProduct = () => {
   const axios = setInstance();
-  const [file,setFile]=useState()
 
   const { values, handleChange, handleBlur, handleSubmit, errors } = useFormik({
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, action) => {
-      // const formData = new FormData();
-      // formData.append('file',file)
-      // formData.append('data',{...values})
-      // console.log(formData);
-      const data = await axios.post("products/addproduct", {...values});
+      await axios.post("products/addproduct", {...values});
       action.resetForm()
     },
   });
@@ -54,15 +49,6 @@ const AddProduct = () => {
             />
           </div>
           <span className="text-danger">{errors.productPrice}</span>
-          {/* <div className="input-group input-group-lg">
-            <Form.Control
-              type="file"
-              className="mt-2"
-              name="image"
-              onChange={(e)=>setFile(e.target.files[0])}
-              required
-            />
-          </div> */}
           <br />
           <Button type="submit" className="btn-lg mb-4" onClick={handleSubmit}>
             Add Product

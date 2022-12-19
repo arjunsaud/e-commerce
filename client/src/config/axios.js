@@ -6,6 +6,7 @@ const {dispatch}=store
 
 export const setInstance=()=>{
   const {auth}=store.getState()
+
   const bearer_Token=auth.bearer_token
   const refresh_Token=auth.refresh_token
   const userEmail=auth.email
@@ -42,11 +43,11 @@ export const setInstance=()=>{
       const response = error.response;
       console.log(response);
       if (response.status === 401) {
-        // if (
-        //   error.config.url !== "/auth/refresh_token" &&
-        //   error.config.url !== "/auth/login" &&
-        //   error.config.url !== "/auth/register"
-        // ) {
+        if (
+          error.config.url !== "/auth/refresh_token" &&
+          error.config.url !== "/auth/login" &&
+          error.config.url !== "/auth/register"
+        ) {
           const response = await refreshTheToken(refresh_Token);
           const {refreshToken, token} = response.data
           const user={
@@ -58,10 +59,9 @@ export const setInstance=()=>{
           dispatch(setAuthDetails(user))
           error.config.headers['Authorization'] = 'Bearer ' + token;
           return instance.request(error.config);
-       // }
+        }
       }
       return Promise.reject(error);
-      //Navigate to login
     }
   );
 
