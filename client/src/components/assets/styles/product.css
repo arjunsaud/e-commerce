@@ -1,0 +1,8 @@
+.viewproductadminsection{
+    cursor: pointer;
+}
+
+.viewproductadminsection:hover{
+    background-color:rgb(5, 138, 82);
+    color: white;
+}

@@ -1,5 +1,5 @@
-import React, { useContext, useRef, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../assets/styles/navbar.css";
 import { BiUserCircle, BiSearch, BiCart } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
@@ -13,7 +13,7 @@ const MyNav = () => {
       <div className="navbar">
         <TopBar />
       </div>
-      <MenuBar/>
+      <MenuBar />
     </header>
   );
 };
@@ -28,7 +28,11 @@ const MenuBar = () => {
             className="hamburger"
             onClick={() => setShowHamburger(!showHamburger)}
           >
-            {showHamburger ? <RxHamburgerMenu color="white" /> : <IoMdClose color="white"/>}
+            {showHamburger ? (
+              <RxHamburgerMenu color="white" />
+            ) : (
+              <IoMdClose color="white" />
+            )}
           </div>
           <ul
             className={
@@ -78,21 +82,36 @@ const MenuBar = () => {
 };
 
 const TopBar = () => {
-  const { role,logout,search,setSearchQuery } = useContext(GlobalContext);
+  const { role, logout, search, setSearchQuery } = useContext(GlobalContext);
 
-  const query=useRef()
-  const navigate=useNavigate()
+  const [query, setQuery] = useState(search);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleSearch=()=>{
-    setSearchQuery(query.current.value)
-    navigate("/search")
+  const handleSearch = () => {
+    if (location.pathname !== "/search") {
+      navigate("/search");
+      setSearchQuery(query);
+    } else {
+      setSearchQuery(query);
+    }
+  };
+
+  const handleClick=()=>{
+    navigate("/")
   }
-
   return (
     <>
-      <div className="logo mx-4">e-Gadget</div>
+      <div className="logo mx-4" style={{cursor:"pointer"}} onClick={{handleClick}}>e-Gadget</div>
       <div className="search">
-        <input type="text" name="search" ref={query} value={search} placeholder="Search Products" required />
+        <input
+          type="text"
+          name="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search Products"
+          required
+        />
         <button type="button" name="button" onClick={handleSearch}>
           <BiSearch />
         </button>

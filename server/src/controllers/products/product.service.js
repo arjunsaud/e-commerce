@@ -50,17 +50,16 @@ class ProductService {
         return newproduct
     }
     } catch (error) {
-      return res.status(401).json({
-        message: err.message,
-      });
+      throw error
     } 
   }
 
-  async editProduct(id){
+  async editProduct(data,id){
     try {
-      
+      const product=await this.Product.updateOne({_id:id.id},{data})
+      return product
     } catch (error) {
-      
+      throw error
     }
   }
 

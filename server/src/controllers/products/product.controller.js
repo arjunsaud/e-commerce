@@ -7,6 +7,7 @@ const ProductController = {
   getproduct: async (req, res) => {
     const id=req.params.id
     const product=await ProductService.getProduct(id)
+    console.log(product);
     return res.status(200).json({
       product      
     })
@@ -29,8 +30,12 @@ const ProductController = {
   },
 
   editproduct: async (req, res) => {
+    const id=req.params
+    const data=req.body
+    const editedProduct=await ProductService.editProduct(data,id)
     res.json({
-      message: "product",
+      message: "Product Update",
+      editedProduct
     });
   },
 

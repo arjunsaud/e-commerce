@@ -13,6 +13,7 @@ import AddProduct from "../pages/admin/AddProduct";
 import UserProfile from "../pages/profile/UserProfile";
 import Search from "../pages/search/Search";
 import Cart from "../pages/cart/Cart";
+import ViewProduct from "../pages/admin/ViewProduct";
 
 export const Router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const Router = createBrowserRouter([
       {
         path: "/admin/addproduct",
         element: <AddProduct />,
+      },
+      {
+        path: "/admin/viewproduct",
+        element: <ViewProduct />,
       }
     ],
   },

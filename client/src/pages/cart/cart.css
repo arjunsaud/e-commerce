@@ -1,3 +1,10 @@
+.cart{
+    display: flex;
+    justify-content: space-around;
+}
+.total{
+    text-align: center;
+}
 .cartlist{
     display: flex;
     flex-direction: column;
@@ -5,7 +12,7 @@
     align-items: center;
 }
 .items{
-    width: 60%;
+    width: 100%;
     display: flex;
     background-color: aqua;
     padding: 5px;
@@ -52,4 +59,6 @@
 .items span{
     padding: 6px;
 }
+
+
 

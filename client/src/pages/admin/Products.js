@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "../../components/assets/styles/product.css";
 import { setInstance } from "../../config/axios";
 const Products = () => {
 
   const axios = setInstance();
 
+  const navigate=useNavigate()
   const [products, setProducts] = useState([]);
   const fetchData = async () => {
     const { data } = await axios.get("products/getproducts");
@@ -22,7 +24,10 @@ const Products = () => {
   const handleDelete=async(id)=>{
     await axios.delete(`products/deleteproduct/${id}`) 
     fetchData()
-    //deleted message
+  }
+
+  const handleViewProduct=(id)=>{
+    navigate("/admin/viewproduct",{ state:{id}})
   }
 
   return (
@@ -47,7 +52,7 @@ const Products = () => {
           {products ? (
             products.map((value) => {
               return (
-                <tr key={value._id}>
+                <tr key={value._id} onClick={()=>handleViewProduct(value._id)} className="viewproductadminsection">
                   <td>{value.productName}</td>
                   <td>Category</td>
                   <td>{value.productPrice}</td>

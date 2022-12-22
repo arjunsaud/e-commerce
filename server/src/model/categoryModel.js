@@ -10,4 +10,4 @@ const CategorySchema=new Schema({
 
 const Category=mongoose.model('Category',CategorySchema)
 
-module.exports = CategorySchema;
+module.exports = Category;
